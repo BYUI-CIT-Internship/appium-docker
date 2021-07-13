@@ -1,26 +1,13 @@
-FROM ubuntu:16.04
+FROM ubuntu:latest
 MAINTAINER Ruben Gonzalez Alonso <rgonalo@gmail.com>
 
-#===============================
-# Customize sources for apt-get
-#===============================
-RUN echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/apt/sources.list \
-  && echo "deb http://archive.ubuntu.com/ubuntu xenial-updates main universe\n" >> /etc/apt/sources.list \
-  && echo "deb http://security.ubuntu.com/ubuntu xenial-security main universe\n" >> /etc/apt/sources.list \
-  && echo "deb http://deb.nodesource.com/node_6.x xenial main\n" >> /etc/apt/sources.list
 
 #===================================================================
 # Miscellaneous packages
 # Includes minimal runtime used for executing non GUI Java programs
 #===================================================================
-RUN apt-get update -qqy \
-  && apt-get -qqy --no-install-recommends install \
-    ca-certificates \
-    openjdk-8-jdk-headless \
-    wget \
-  && rm -rf /var/lib/apt/lists/* \
-  && sed -i 's/securerandom\.source=file:\/dev\/random/securerandom\.source=file:\/dev\/urandom/' ./usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
-
+RUN apt update 
+RUN apt install -y wget
 #=============
 # Android SDK
 #=============
