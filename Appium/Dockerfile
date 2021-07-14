@@ -36,15 +36,16 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 #===================
 ENV APPIUM_VERSION 1.21.0
 RUN apt update
+RUN apt install -y nodejs
 RUN apt install -y npm
-RUN npm install -g appium@$APPIUM_VERSION
+RUN npm install -g appium@$APPIUM_VERSION --chromedriver-skip-install
 
 #============================================
 # Add udev rules file with USB configuration
 #============================================
-ENV UDEV_REMOTE_FILE https://raw.githubusercontent.com/M0Rf30/android-udev-rules/master/51-android.rules
-RUN mkdir /etc/udev/rules.d \
-  && wget --no-verbose $UDEV_REMOTE_FILE -O /etc/udev/rules.d/51-android.rules
+#ENV UDEV_REMOTE_FILE https://raw.githubusercontent.com/M0Rf30/android-udev-rules/master/51-android.rules
+#RUN mkdir /etc/udev/rules.d \
+#  && wget --no-verbose $UDEV_REMOTE_FILE -O /etc/udev/rules.d/51-android.rules
 
 # Appium server port
 EXPOSE 4723
