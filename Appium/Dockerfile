@@ -1,7 +1,6 @@
 FROM ubuntu:latest
 MAINTAINER Ruben Gonzalez Alonso <rgonalo@gmail.com>
 
-SHELL ["/bin/bash", "-c"]
 #===================================================================
 # Miscellaneous packages
 # Includes minimal runtime used for executing non GUI Java programs
